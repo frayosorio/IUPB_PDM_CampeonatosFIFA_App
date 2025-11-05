@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_campeonatos_fifa/servicios/usuario_servicio.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -11,7 +12,21 @@ class _LoginState extends State<Login> {
   final usuarioController = TextEditingController();
   final claveController = TextEditingController();
 
-  Future<void> _login() async {}
+  final servicioUsuario = UsuarioServicio();
+
+  Future<void> _login() async {
+    final logueado = await servicioUsuario.login(
+      usuarioController.text,
+      claveController.text,
+    );
+    if (logueado && context.mounted) {
+      Navigator.pushReplacementNamed(context, "/inicio");
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Usuario o clave no válidos")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext contexto) {

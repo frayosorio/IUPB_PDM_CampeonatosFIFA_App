@@ -3,11 +3,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class UsuarioServicio {
-  final String urlBase = "http://localhost:8080/api/usuarios/";
+  final String urlBase = "http://10.0.2.2:8080/api/usuarios/";
   final variablesApp = FlutterSecureStorage();
 
   Future<bool> login(String usuario, String clave) async {
     final url = Uri.parse("$urlBase/validar/$usuario/$clave");
+    final servicioUsuario = UsuarioServicio();
 
     final response = await http.get(url);
 

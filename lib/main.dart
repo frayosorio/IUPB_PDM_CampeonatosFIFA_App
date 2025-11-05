@@ -1,3 +1,5 @@
+import 'package:app_campeonatos_fifa/vistas/inicio.dart';
+import 'package:app_campeonatos_fifa/vistas/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +19,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: "/login",
       routes: {
-
+        "/login": (contexto) => const Login(),
+        "/inicio": (contexto) => const Inicio(),
       }
     );
   }
