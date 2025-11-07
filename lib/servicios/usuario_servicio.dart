@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class UsuarioServicio {
-  final String urlBase = "http://10.0.2.2:8080/api/usuarios/";
+  final String urlBase = "http://10.0.2.2:8080/api/usuarios";
   final variablesApp = FlutterSecureStorage();
 
   Future<bool> login(String usuario, String clave) async {
@@ -12,14 +12,14 @@ class UsuarioServicio {
 
     final response = await http.get(url);
 
+    print('Status code: ${response.statusCode}');
+    print('Body: ${response.body}');
+
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
 
       await variablesApp.write(key: "token", value: data["token"]);
-      await variablesApp.write(
-        key: "usuario",
-        value: jsonDecode(data["usuario"]),
-      );
+      await variablesApp.write(key: "usuario", value: jsonEncode(data["usuario"]));
 
       return true;
     }
