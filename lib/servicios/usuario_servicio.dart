@@ -8,7 +8,6 @@ class UsuarioServicio {
 
   Future<bool> login(String usuario, String clave) async {
     final url = Uri.parse("$urlBase/validar/$usuario/$clave");
-    final servicioUsuario = UsuarioServicio();
 
     final response = await http.get(url);
 
